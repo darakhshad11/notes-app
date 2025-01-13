@@ -5,6 +5,7 @@ import { register } from '../../features/auth/authSlice';
 import Button from '../common/Button';
 import Input from '../common/Input';
 import { toast } from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 const RegisterForm = () => {
   const [formData, setFormData] = useState({
@@ -14,7 +15,7 @@ const RegisterForm = () => {
     confirmPassword: ''
   });
   const [errors, setErrors] = useState({});
-
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { isLoading } = useSelector((state) => state.auth);
 
@@ -42,6 +43,8 @@ const RegisterForm = () => {
         };
         await dispatch(register(userData)).unwrap();
         toast.success('Registration successful!');
+        navigate('/login');
+
       } catch (error) {
         toast.error(error || 'Registration failed');
       }
