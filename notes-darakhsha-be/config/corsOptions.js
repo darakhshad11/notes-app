@@ -1,6 +1,7 @@
 // config/corsOptions.js
 const whitelist = [
-    'https://notes-app-cs5y.onrender.com',
+    
+    'https://notes-app-2pse.onrender.com',
     'http://localhost:8000',     
     'http://localhost:5173',    
     'http://127.0.0.1:3000',
