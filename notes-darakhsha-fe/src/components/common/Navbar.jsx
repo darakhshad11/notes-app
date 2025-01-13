@@ -1,20 +1,23 @@
-
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { logoutUser } from '../../features/auth/authSlice';
 import { toast } from 'react-hot-toast';
-import { 
-  HiOutlineMenuAlt1, 
-  HiOutlineBell, 
+import {
+  HiOutlineMenuAlt1,
+  HiOutlineBell,
   HiOutlineLogout,
-  HiOutlineX 
+  HiOutlineX,
+  HiMoon,
+  HiSun
 } from 'react-icons/hi';
+import { useDarkMode } from '../../context/DarkModeContext';
 
 const Navbar = ({ toggleSidebar, isSidebarOpen, user }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { isDarkMode, toggleDarkMode } = useDarkMode();
 
   const handleLogout = async () => {
     try {
@@ -36,17 +39,35 @@ const Navbar = ({ toggleSidebar, isSidebarOpen, user }) => {
               onClick={toggleSidebar}
               className="md:hidden p-2 rounded-md text-gray-600 hover:text-gray-900 focus:outline-none mr-4"
             >
-              {isSidebarOpen ? <HiOutlineX className="h-6 w-6" /> : <HiOutlineMenuAlt1 className="h-6 w-6" />}
+              {isSidebarOpen ? (
+                <HiOutlineX className="h-6 w-6" /> 
+              ) : (
+                <HiOutlineMenuAlt1 className="h-6 w-6" />
+              )}
             </button>
-            
-            {/* App Title */}
-            <Link to="/" className="flex-shrink-0 flex items-center">
-              <span className="text-2xl font-bold text-primary-600">Notes App</span>
-            </Link>
+
+          
           </div>
 
           {/* Right side navigation */}
           <div className="flex items-center">
+            {/* Dark Mode Toggle */}
+              {/* App Title */}
+              <Link to="/" className="flex-shrink-0 flex items-center ml-4 ">
+              <span className="text-2xl font-bold text
+              -primary-600">Notes App</span>
+            </Link>
+            <button
+              onClick={toggleDarkMode}
+              className="p-2 rounded-md text-gray-600 hover:text-gray-900 focus:outline-none mr-3"
+            >
+              {isDarkMode ? (
+                <HiSun className="h-6 w-6" />
+              ) : (
+                <HiMoon className="h-6 w-6" />
+              )}
+            </button>
+
             {/* Notifications */}
             <button className="p-2 rounded-md text-gray-600 hover:text-gray-900 focus:outline-none mr-3">
               <HiOutlineBell className="h-6 w-6" />
